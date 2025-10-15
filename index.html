@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard MBG Sekolah Dasar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .slide-up {
+            animation: slideUp 0.3s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-backdrop {
+            backdrop-filter: blur(4px);
+        }
+        
+        .hover-scale {
+            transition: transform 0.2s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #4ABDAC 0%, #00BCD4 100%);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
+        }
+    </style>
+</head>
+<body class="bg-green-50 min-h-full">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg border-b-4 border-teal-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-xl font-bold text-gray-800">Portal MBG Kemdikbud</h1>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center">
+                            <span class="text-white text-sm font-medium">YS</span>
+                        </div>
+                        <span class="text-gray-700 text-sm font-medium">Yohana Syarif Krisjianto</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div id="app">
+        <!-- Form Page -->
+        <div id="formPage" class="hidden">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-yellow-400 to-orange-400 py-8">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h1 class="text-3xl font-bold text-white text-center">
+                        Formulir Pelaksanaan MBG di Satuan Pendidikan
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Form Content -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Form Section -->
+                    <div class="lg:col-span-2">
+                        <div class="bg-white rounded-lg shadow-lg p-6">
+                            <form id="mbgForm">
+                                <div class="space-y-6">
+                                    <!-- Koordinator Info -->
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                                Nama Koordinator Petugas MBG *
+                                            </label>
+                                            <input type="text" id="koordinator" required
+                                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                                Nomor Kontak Koordinator *
+                                            </label>
+                                            <input type="tel" id="kontak" required
+                                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                        </div>
+                                    </div>
+
+                                    <!-- Waktu Penerimaan -->
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                                            Waktu Penerimaan Porsi Makanan *
+                                        </label>
+                                        <input type="datetime-local" id="waktu" required
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                    </div>
+
+                                    <!-- Cara Penyajian -->
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-3">
+                                            Cara Penyajian Porsi Makanan *
+                                        </label>
+                                        <div class="space-y-2">
+                                            <label class="flex items-center">
+                                                <input type="radio" name="penyajian" value="stainless" required class="text-teal-500 focus:ring-teal-500">
+                                                <span class="ml-2 text-sm text-gray-700">Menggunakan peralatan makan stainless</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="radio" name="penyajian" value="organik" class="text-teal-500 focus:ring-teal-500">
+                                                <span class="ml-2 text-sm text-gray-700">Bungkus organik</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="radio" name="penyajian" value="non-organik" class="text-teal-500 focus:ring-teal-500">
+                                                <span class="ml-2 text-sm text-gray-700">Bungkus non-organik</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="radio" name="penyajian" value="lainnya" class="text-teal-500 focus:ring-teal-500">
+                                                <span class="ml-2 text-sm text-gray-700">Lainnya</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Jumlah Porsi -->
+                                    <div>
+                                        <h3 class="text-lg font-medium text-gray-900 mb-4">Jumlah Porsi Makanan</h3>
+                                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                            <div>
+                                                <label class="block text-sm font-medium text-gray-700 mb-2">Umum</label>
+                                                <input type="number" id="porsiUmum" min="0" value="0"
+                                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                            </div>
+                                            <div>
+                                                <label class="block text-sm font-medium text-gray-700 mb-2">Khusus</label>
+                                                <input type="number" id="porsiKhusus" min="0" value="0"
+                                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                            </div>
+                                            <div>
+                                                <label class="block text-sm font-medium text-gray-700 mb-2">Tidak Layak</label>
+                                                <input type="number" id="porsiTidakLayak" min="0" value="0"
+                                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                            </div>
+                                            <div>
+                                                <label class="block text-sm font-medium text-gray-700 mb-2">Dikembalikan</label>
+                                                <input type="number" id="porsiDikembalikan" min="0" value="0"
+                                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Alasan Tidak Layak -->
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-3">
+                                            Alasan Makanan Tidak Layak
+                                        </label>
+                                        <div class="space-y-2">
+                                            <label class="flex items-center">
+                                                <input type="radio" name="alasan" value="menu-tidak-sesuai" class="text-teal-500 focus:ring-teal-500">
+                                                <span class="ml-2 text-sm text-gray-700">Menu tidak sesuai</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="radio" name="alasan" value="basi" class="text-teal-500 focus:ring-teal-500">
+                                                <span class="ml-2 text-sm text-gray-700">Basi</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="radio" name="alasan" value="berbahaya" class="text-teal-500 focus:ring-teal-500">
+                                                <span class="ml-2 text-sm text-gray-700">Berbahaya</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="radio" name="alasan" value="seluruh-layak" class="text-teal-500 focus:ring-teal-500">
+                                                <span class="ml-2 text-sm text-gray-700">Seluruh layak</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="radio" name="alasan" value="lainnya" class="text-teal-500 focus:ring-teal-500">
+                                                <span class="ml-2 text-sm text-gray-700">Lainnya</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Alasan Porsi Dikembalikan -->
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-3">
+                                            Alasan Porsi Makanan Bergizi yang dikembalikan hari ini *
+                                        </label>
+                                        <div class="space-y-2">
+                                            <label class="flex items-center">
+                                                <input type="radio" name="alasanDikembalikan" value="porsi-tidak-layak" required class="text-teal-500 focus:ring-teal-500">
+                                                <span class="ml-2 text-sm text-gray-700">Porsi makan tidak layak</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="radio" name="alasanDikembalikan" value="siswa-tidak-hadir" class="text-teal-500 focus:ring-teal-500">
+                                                <span class="ml-2 text-sm text-gray-700">Terdapat peserta didik yang tidak hadir</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="radio" name="alasanDikembalikan" value="porsi-berlebih" class="text-teal-500 focus:ring-teal-500">
+                                                <span class="ml-2 text-sm text-gray-700">Porsi makanan terkirim lebih dari jumlah peserta didik penerima manfaat</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="radio" name="alasanDikembalikan" value="tidak-ada-dikembalikan" class="text-teal-500 focus:ring-teal-500">
+                                                <span class="ml-2 text-sm text-gray-700">Tidak ada porsi makan yang dikembalikan</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="radio" name="alasanDikembalikan" value="lainnya" class="text-teal-500 focus:ring-teal-500">
+                                                <span class="ml-2 text-sm text-gray-700">Lainnya</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Action Buttons -->
+                                    <div class="flex flex-col sm:flex-row gap-4 pt-6">
+                                        <button type="submit" id="submitBtn"
+                                            class="btn-warning text-white px-8 py-3 rounded-lg font-medium hover-scale shadow-lg">
+                                            <span id="submitText">Simpan Data</span>
+                                        </button>
+                                        <button type="button" id="resetBtn"
+                                            class="bg-gray-500 hover:bg-gray-600 text-white px-8 py-3 rounded-lg font-medium hover-scale shadow-lg">
+                                            Reset Formulir
+                                        </button>
+                                        <button type="button" id="backToDashboard"
+                                            class="btn-primary text-white px-8 py-3 rounded-lg font-medium hover-scale shadow-lg">
+                                            Kembali ke Dashboard
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Info Panel -->
+                    <div class="lg:col-span-1 space-y-6">
+                        <!-- Informasi Satuan Pendidikan -->
+                        <div class="bg-blue-50 border-l-4 border-blue-400 rounded-lg p-6 shadow-lg">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="text-lg font-semibold text-blue-800">Informasi Satuan Pendidikan</h3>
+                                <button id="editInfoBtn" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                    ✏️ Edit
+                                </button>
+                            </div>
+                            
+                            <!-- View Mode -->
+                            <div id="infoViewMode" class="space-y-3 text-sm text-blue-700">
+                                <div>
+                                    <strong>Nama Sekolah:</strong><br>
+                                    <span id="displayNamaSekolah">SD Negeri 01 Jakarta</span>
+                                </div>
+                                <div>
+                                    <strong>NPSN:</strong><br>
+                                    <span id="displayNpsn">20104001</span>
+                                </div>
+                                <div>
+                                    <strong>Alamat:</strong><br>
+                                    <span id="displayAlamat">Jl. Pendidikan No. 123, Jakarta Pusat</span>
+                                </div>
+                                <div>
+                                    <strong>Kepala Sekolah:</strong><br>
+                                    <span id="displayKepalaSekolah">Drs. Ahmad Suryanto, M.Pd</span>
+                                </div>
+                                <div>
+                                    <strong>Jumlah Siswa:</strong><br>
+                                    <span id="displayJumlahSiswa">450</span> siswa
+                                </div>
+                            </div>
+
+                            <!-- Edit Mode -->
+                            <div id="infoEditMode" class="space-y-4 hidden">
+                                <div>
+                                    <label class="block text-sm font-medium text-blue-800 mb-1">Nama Sekolah</label>
+                                    <input type="text" id="editNamaSekolah" 
+                                        class="w-full px-3 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-blue-800 mb-1">NPSN</label>
+                                    <input type="text" id="editNpsn" 
+                                        class="w-full px-3 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-blue-800 mb-1">Alamat</label>
+                                    <textarea id="editAlamat" rows="2"
+                                        class="w-full px-3 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-blue-800 mb-1">Kepala Sekolah</label>
+                                    <input type="text" id="editKepalaSekolah" 
+                                        class="w-full px-3 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-blue-800 mb-1">Jumlah Siswa</label>
+                                    <input type="number" id="editJumlahSiswa" min="1"
+                                        class="w-full px-3 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
+                                </div>
+                                <div class="flex space-x-2 pt-2">
+                                    <button id="saveInfoBtn" 
+                                        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+                                        Simpan
+                                    </button>
+                                    <button id="cancelInfoBtn" 
+                                        class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-md text-sm font-medium">
+                                        Batal
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Form Kejadian Khusus -->
+                        <div class="bg-orange-50 border-l-4 border-orange-400 rounded-lg p-6 shadow-lg">
+                            <h3 class="text-lg font-semibold text-orange-800 mb-4">Kejadian Khusus</h3>
+                            
+                            <form id="kejadianKhususForm" class="space-y-4">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-orange-800 mb-1">Jumlah Laki-laki</label>
+                                        <input type="number" id="jumlahLaki" min="0" value="0"
+                                            class="w-full px-3 py-2 border border-orange-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-orange-800 mb-1">Jumlah Perempuan</label>
+                                        <input type="number" id="jumlahPerempuan" min="0" value="0"
+                                            class="w-full px-3 py-2 border border-orange-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm">
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-1 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-orange-800 mb-1">Jumlah Fobia</label>
+                                        <input type="number" id="jumlahFobia" min="0" value="0"
+                                            class="w-full px-3 py-2 border border-orange-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-orange-800 mb-1">Jumlah Intoleran</label>
+                                        <input type="number" id="jumlahIntoleran" min="0" value="0"
+                                            class="w-full px-3 py-2 border border-orange-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-orange-800 mb-1">Jumlah Alergi</label>
+                                        <input type="number" id="jumlahAlergi" min="0" value="0"
+                                            class="w-full px-3 py-2 border border-orange-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-orange-800 mb-1">Catatan Hari Ini</label>
+                                    <textarea id="catatanHari" rows="3" placeholder="Tulis catatan khusus untuk hari ini..."
+                                        class="w-full px-3 py-2 border border-orange-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm"></textarea>
+                                </div>
+                                
+                                <div class="pt-2">
+                                    <button type="submit" 
+                                        class="w-full bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+                                        Simpan Kejadian Khusus
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Page -->
+        <div id="dashboardPage">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-teal-500 to-cyan-500 py-8">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h1 class="text-3xl font-bold text-white text-center">
+                        Dashboard MBG Sekolah Dasar v2
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Dashboard Content -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <!-- Controls -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <div class="flex items-center space-x-4">
+                            <button id="addDataBtn" 
+                                class="btn-primary text-white px-6 py-2 rounded-lg font-medium hover-scale shadow-lg flex items-center">
+                                <span class="mr-2">+</span> Tambah Data
+                            </button>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <input type="text" id="searchInput" placeholder="Cari berdasarkan nama sekolah atau tanggal..."
+                                class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 w-80">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Table -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Tanggal Pelaksanaan
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Nama Sekolah
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Jumlah Penerima Manfaat
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Jumlah Kondisi Khusus
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Aksi
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="dataTableBody" class="bg-white divide-y divide-gray-200">
+                                <!-- Data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Empty State -->
+                    <div id="emptyState" class="text-center py-12 hidden">
+                        <div class="text-gray-400 text-lg mb-4">📊</div>
+                        <h3 class="text-lg font-medium text-gray-900 mb-2">Belum ada data</h3>
+                        <p class="text-gray-500 mb-4">Mulai dengan menambahkan data pelaksanaan MBG pertama Anda</p>
+                        <button id="addFirstDataBtn" 
+                            class="btn-primary text-white px-6 py-2 rounded-lg font-medium hover-scale shadow-lg">
+                            + Tambah Data Pertama
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div id="pagination" class="flex justify-center items-center space-x-2 mt-6">
+                    <button id="prevBtn" class="px-4 py-2 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 disabled:opacity-50">
+                        Previous
+                    </button>
+                    <div id="pageNumbers" class="flex space-x-1">
+                        <!-- Page numbers will be populated here -->
+                    </div>
+                    <button id="nextBtn" class="px-4 py-2 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 disabled:opacity-50">
+                        Next
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detail Modal -->
+    <div id="detailModal" class="fixed inset-0 bg-black bg-opacity-50 modal-backdrop hidden z-50">
+        <div class="flex items-center justify-center min-h-full p-4">
+            <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-full overflow-y-auto slide-up">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900">Detail Data MBG</h3>
+                        <button id="closeDetailModal" class="text-gray-400 hover:text-gray-600">
+                            <span class="text-2xl">&times;</span>
+                        </button>
+                    </div>
+                    <div id="detailContent" class="space-y-4">
+                        <!-- Detail content will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 modal-backdrop hidden z-50">
+        <div class="flex items-center justify-center min-h-full p-4">
+            <div class="bg-white rounded-lg shadow-xl max-w-md w-full slide-up">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-red-600 text-xl">🗑️</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">Konfirmasi Hapus</h3>
+                            <p class="text-gray-600">Yakin ingin menghapus data ini?</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-end space-x-3">
+                        <button id="cancelDelete" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300">
+                            Batal
+                        </button>
+                        <button id="confirmDelete" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                            Hapus
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data Management
+        class MBGDataManager {
+            constructor() {
+                this.data = this.loadData();
+                this.schoolInfo = this.loadSchoolInfo();
+                this.currentPage = 1;
+                this.itemsPerPage = 10;
+                this.editingId = null;
+                this.deleteId = null;
+                this.filteredData = [...this.data];
+                this.init();
+            }
+
+            init() {
+                this.bindEvents();
+                this.loadSchoolInfoDisplay();
+                this.showDashboard();
+                this.renderTable();
+            }
+
+            loadData() {
+                const stored = localStorage.getItem('mbgData');
+                return stored ? JSON.parse(stored) : [];
+            }
+
+            saveData() {
+                localStorage.setItem('mbgData', JSON.stringify(this.data));
+            }
+
+            loadSchoolInfo() {
+                const stored = localStorage.getItem('schoolInfo');
+                return stored ? JSON.parse(stored) : {
+                    namaSekolah: 'SD Negeri 01 Jakarta',
+                    npsn: '20104001',
+                    alamat: 'Jl. Pendidikan No. 123, Jakarta Pusat',
+                    kepalaSekolah: 'Drs. Ahmad Suryanto, M.Pd',
+                    jumlahSiswa: '450'
+                };
+            }
+
+            saveSchoolInfo() {
+                const schoolInfo = {
+                    namaSekolah: document.getElementById('editNamaSekolah').value,
+                    npsn: document.getElementById('editNpsn').value,
+                    alamat: document.getElementById('editAlamat').value,
+                    kepalaSekolah: document.getElementById('editKepalaSekolah').value,
+                    jumlahSiswa: document.getElementById('editJumlahSiswa').value
+                };
+                
+                this.schoolInfo = schoolInfo;
+                localStorage.setItem('schoolInfo', JSON.stringify(schoolInfo));
+                this.loadSchoolInfoDisplay();
+                this.cancelEditInfo();
+                this.showNotification('Informasi sekolah berhasil disimpan!');
+            }
+
+            loadSchoolInfoDisplay() {
+                document.getElementById('displayNamaSekolah').textContent = this.schoolInfo.namaSekolah;
+                document.getElementById('displayNpsn').textContent = this.schoolInfo.npsn;
+                document.getElementById('displayAlamat').textContent = this.schoolInfo.alamat;
+                document.getElementById('displayKepalaSekolah').textContent = this.schoolInfo.kepalaSekolah;
+                document.getElementById('displayJumlahSiswa').textContent = this.schoolInfo.jumlahSiswa;
+            }
+
+            showEditInfo() {
+                document.getElementById('editNamaSekolah').value = this.schoolInfo.namaSekolah;
+                document.getElementById('editNpsn').value = this.schoolInfo.npsn;
+                document.getElementById('editAlamat').value = this.schoolInfo.alamat;
+                document.getElementById('editKepalaSekolah').value = this.schoolInfo.kepalaSekolah;
+                document.getElementById('editJumlahSiswa').value = this.schoolInfo.jumlahSiswa;
+                
+                document.getElementById('infoViewMode').classList.add('hidden');
+                document.getElementById('infoEditMode').classList.remove('hidden');
+            }
+
+            cancelEditInfo() {
+                document.getElementById('infoViewMode').classList.remove('hidden');
+                document.getElementById('infoEditMode').classList.add('hidden');
+            }
+
+            bindEvents() {
+                // Navigation
+                document.getElementById('addDataBtn').addEventListener('click', () => this.showForm());
+                document.getElementById('addFirstDataBtn').addEventListener('click', () => this.showForm());
+                document.getElementById('backToDashboard').addEventListener('click', () => this.showDashboard());
+
+                // Form
+                document.getElementById('mbgForm').addEventListener('submit', (e) => this.handleSubmit(e));
+                document.getElementById('resetBtn').addEventListener('click', () => this.resetForm());
+                document.getElementById('kejadianKhususForm').addEventListener('submit', (e) => this.handleKejadianKhususSubmit(e));
+
+                // School Info Edit
+                document.getElementById('editInfoBtn').addEventListener('click', () => this.showEditInfo());
+                document.getElementById('saveInfoBtn').addEventListener('click', () => this.saveSchoolInfo());
+                document.getElementById('cancelInfoBtn').addEventListener('click', () => this.cancelEditInfo());
+
+                // Search
+                document.getElementById('searchInput').addEventListener('input', (e) => this.handleSearch(e.target.value));
+
+                // Modals
+                document.getElementById('closeDetailModal').addEventListener('click', () => this.closeDetailModal());
+                document.getElementById('cancelDelete').addEventListener('click', () => this.closeDeleteModal());
+                document.getElementById('confirmDelete').addEventListener('click', () => this.deleteData());
+
+                // Pagination
+                document.getElementById('prevBtn').addEventListener('click', () => this.changePage(this.currentPage - 1));
+                document.getElementById('nextBtn').addEventListener('click', () => this.changePage(this.currentPage + 1));
+            }
+
+            showForm(editData = null) {
+                document.getElementById('dashboardPage').classList.add('hidden');
+                document.getElementById('formPage').classList.remove('hidden');
+                
+                if (editData) {
+                    this.editingId = editData.id;
+                    this.populateForm(editData);
+                    document.getElementById('submitText').textContent = 'Update Data';
+                } else {
+                    this.editingId = null;
+                    this.resetForm();
+                    document.getElementById('submitText').textContent = 'Simpan Data';
+                }
+            }
+
+            showDashboard() {
+                document.getElementById('formPage').classList.add('hidden');
+                document.getElementById('dashboardPage').classList.remove('hidden');
+                this.renderTable();
+            }
+
+            populateForm(data) {
+                document.getElementById('koordinator').value = data.koordinator;
+                document.getElementById('kontak').value = data.kontak;
+                document.getElementById('waktu').value = data.waktu;
+                document.querySelector(`input[name="penyajian"][value="${data.penyajian}"]`).checked = true;
+                document.getElementById('porsiUmum').value = data.porsiUmum;
+                document.getElementById('porsiKhusus').value = data.porsiKhusus;
+                document.getElementById('porsiTidakLayak').value = data.porsiTidakLayak;
+                document.getElementById('porsiDikembalikan').value = data.porsiDikembalikan;
+                if (data.alasan) {
+                    document.querySelector(`input[name="alasan"][value="${data.alasan}"]`).checked = true;
+                }
+                if (data.alasanDikembalikan) {
+                    document.querySelector(`input[name="alasanDikembalikan"][value="${data.alasanDikembalikan}"]`).checked = true;
+                }
+                
+                // Populate kejadian khusus data
+                if (data.kejadianKhusus) {
+                    document.getElementById('jumlahLaki').value = data.kejadianKhusus.jumlahLaki || 0;
+                    document.getElementById('jumlahPerempuan').value = data.kejadianKhusus.jumlahPerempuan || 0;
+                    document.getElementById('jumlahFobia').value = data.kejadianKhusus.jumlahFobia || 0;
+                    document.getElementById('jumlahIntoleran').value = data.kejadianKhusus.jumlahIntoleran || 0;
+                    document.getElementById('jumlahAlergi').value = data.kejadianKhusus.jumlahAlergi || 0;
+                    document.getElementById('catatanHari').value = data.kejadianKhusus.catatanHari || '';
+                }
+            }
+
+            resetForm() {
+                document.getElementById('mbgForm').reset();
+                document.getElementById('porsiUmum').value = 0;
+                document.getElementById('porsiKhusus').value = 0;
+                document.getElementById('porsiTidakLayak').value = 0;
+                document.getElementById('porsiDikembalikan').value = 0;
+                
+                // Reset kejadian khusus form
+                document.getElementById('kejadianKhususForm').reset();
+                document.getElementById('jumlahLaki').value = 0;
+                document.getElementById('jumlahPerempuan').value = 0;
+                document.getElementById('jumlahFobia').value = 0;
+                document.getElementById('jumlahIntoleran').value = 0;
+                document.getElementById('jumlahAlergi').value = 0;
+                document.getElementById('catatanHari').value = '';
+            }
+
+            handleSubmit(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(e.target);
+                const data = {
+                    id: this.editingId || Date.now().toString(),
+                    koordinator: formData.get('koordinator') || document.getElementById('koordinator').value,
+                    kontak: formData.get('kontak') || document.getElementById('kontak').value,
+                    waktu: formData.get('waktu') || document.getElementById('waktu').value,
+                    penyajian: formData.get('penyajian'),
+                    porsiUmum: parseInt(document.getElementById('porsiUmum').value) || 0,
+                    porsiKhusus: parseInt(document.getElementById('porsiKhusus').value) || 0,
+                    porsiTidakLayak: parseInt(document.getElementById('porsiTidakLayak').value) || 0,
+                    porsiDikembalikan: parseInt(document.getElementById('porsiDikembalikan').value) || 0,
+                    alasan: formData.get('alasan'),
+                    alasanDikembalikan: formData.get('alasanDikembalikan'),
+                    namaSekolah: this.schoolInfo.namaSekolah,
+                    createdAt: this.editingId ? this.data.find(d => d.id === this.editingId)?.createdAt : new Date().toISOString(),
+                    // Tambahkan data kejadian khusus
+                    kejadianKhusus: {
+                        jumlahLaki: parseInt(document.getElementById('jumlahLaki').value) || 0,
+                        jumlahPerempuan: parseInt(document.getElementById('jumlahPerempuan').value) || 0,
+                        jumlahFobia: parseInt(document.getElementById('jumlahFobia').value) || 0,
+                        jumlahIntoleran: parseInt(document.getElementById('jumlahIntoleran').value) || 0,
+                        jumlahAlergi: parseInt(document.getElementById('jumlahAlergi').value) || 0,
+                        catatanHari: document.getElementById('catatanHari').value || ''
+                    }
+                };
+
+                if (this.editingId) {
+                    const index = this.data.findIndex(d => d.id === this.editingId);
+                    this.data[index] = data;
+                } else {
+                    this.data.push(data);
+                }
+
+                this.saveData();
+
+    // === 🔽 Tambahan baru: Kirim ke Google Sheet ===
+    const scriptURL = "https://script.google.com/macros/s/AKfycbz_MXN5s-cePJTOPuEuDaXjkI-7SH2OuWWDmfR4jcQNPwB7wEYnym7ax0uWGNyWui8Q/exec"; // ganti URL kamu di sini ok
+    fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" }
+    })
+    .then(res => res.text())
+    .then(() => this.showNotification("Data tersimpan juga ke Google Sheet!"))
+    .catch(() => this.showNotification("Offline: Data hanya tersimpan lokal.", "error"));
+    // === 🔼 Tambahan baru sampai sini ===
+
+                this.showDashboard();
+                
+                // Show success message
+                this.showNotification(this.editingId ? 'Data berhasil diperbarui!' : 'Data berhasil disimpan!');
+            }
+
+            handleKejadianKhususSubmit(e) {
+                e.preventDefault();
+                
+                // Validasi apakah form utama sudah diisi
+                const koordinator = document.getElementById('koordinator').value;
+                const waktu = document.getElementById('waktu').value;
+                
+                if (!koordinator || !waktu) {
+                    this.showNotification('Harap isi form utama terlebih dahulu!', 'error');
+                    return;
+                }
+                
+                this.showNotification('Data kejadian khusus tersimpan! Klik "Simpan Data" untuk menyimpan semua data.');
+            }
+
+            handleSearch(query) {
+                if (!query.trim()) {
+                    this.filteredData = [...this.data];
+                } else {
+                    this.filteredData = this.data.filter(item => 
+                        item.namaSekolah.toLowerCase().includes(query.toLowerCase()) ||
+                        new Date(item.waktu).toLocaleDateString('id-ID').includes(query)
+                    );
+                }
+                this.currentPage = 1;
+                this.renderTable();
+            }
+
+            renderTable() {
+                const tbody = document.getElementById('dataTableBody');
+                const emptyState = document.getElementById('emptyState');
+                
+                if (this.filteredData.length === 0) {
+                    tbody.innerHTML = '';
+                    emptyState.classList.remove('hidden');
+                    document.getElementById('pagination').classList.add('hidden');
+                    return;
+                }
+
+                emptyState.classList.add('hidden');
+                document.getElementById('pagination').classList.remove('hidden');
+
+                const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+                const endIndex = startIndex + this.itemsPerPage;
+                const pageData = this.filteredData.slice(startIndex, endIndex);
+
+                tbody.innerHTML = pageData.map(item => `
+                    <tr class="hover:bg-gray-50 fade-in">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            ${new Date(item.waktu).toLocaleDateString('id-ID')}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            ${item.namaSekolah}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            ${item.porsiUmum + item.porsiKhusus}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            ${item.porsiKhusus}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                            <button onclick="mbgManager.showDetail('${item.id}')" 
+                                class="text-blue-600 hover:text-blue-900 hover-scale" title="Lihat Detail">
+                                👁️
+                            </button>
+                            <button onclick="mbgManager.editData('${item.id}')" 
+                                class="text-green-600 hover:text-green-900 hover-scale" title="Edit">
+                                ✏️
+                            </button>
+                            <button onclick="mbgManager.showDeleteModal('${item.id}')" 
+                                class="text-red-600 hover:text-red-900 hover-scale" title="Hapus">
+                                🗑️
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+
+                this.renderPagination();
+            }
+
+            renderPagination() {
+                const totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
+                const pageNumbers = document.getElementById('pageNumbers');
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+
+                prevBtn.disabled = this.currentPage === 1;
+                nextBtn.disabled = this.currentPage === totalPages;
+
+                let paginationHTML = '';
+                for (let i = 1; i <= totalPages; i++) {
+                    paginationHTML += `
+                        <button onclick="mbgManager.changePage(${i})" 
+                            class="px-3 py-2 rounded-lg ${i === this.currentPage ? 'bg-teal-500 text-white' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'}">
+                            ${i}
+                        </button>
+                    `;
+                }
+                pageNumbers.innerHTML = paginationHTML;
+            }
+
+            changePage(page) {
+                const totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
+                if (page >= 1 && page <= totalPages) {
+                    this.currentPage = page;
+                    this.renderTable();
+                }
+            }
+
+            showDetail(id) {
+                const item = this.data.find(d => d.id === id);
+                if (!item) return;
+
+                const content = document.getElementById('detailContent');
+                content.innerHTML = `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Nama Koordinator</label>
+                            <p class="mt-1 text-sm text-gray-900">${item.koordinator}</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Nomor Kontak</label>
+                            <p class="mt-1 text-sm text-gray-900">${item.kontak}</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Waktu Penerimaan</label>
+                            <p class="mt-1 text-sm text-gray-900">${new Date(item.waktu).toLocaleString('id-ID')}</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Cara Penyajian</label>
+                            <p class="mt-1 text-sm text-gray-900">${this.formatPenyajian(item.penyajian)}</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Porsi Umum</label>
+                            <p class="mt-1 text-sm text-gray-900">${item.porsiUmum}</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Porsi Khusus</label>
+                            <p class="mt-1 text-sm text-gray-900">${item.porsiKhusus}</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Porsi Tidak Layak</label>
+                            <p class="mt-1 text-sm text-gray-900">${item.porsiTidakLayak}</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Porsi Dikembalikan</label>
+                            <p class="mt-1 text-sm text-gray-900">${item.porsiDikembalikan}</p>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700">Alasan Tidak Layak</label>
+                            <p class="mt-1 text-sm text-gray-900">${this.formatAlasan(item.alasan)}</p>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700">Alasan Porsi Dikembalikan</label>
+                            <p class="mt-1 text-sm text-gray-900">${this.formatAlasanDikembalikan(item.alasanDikembalikan)}</p>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700">Nama Sekolah</label>
+                            <p class="mt-1 text-sm text-gray-900">${item.namaSekolah}</p>
+                        </div>
+                        ${item.kejadianKhusus ? `
+                        <div class="md:col-span-2 border-t pt-4 mt-4">
+                            <h4 class="text-lg font-medium text-gray-900 mb-3">Kejadian Khusus</h4>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Jumlah Laki-laki</label>
+                                    <p class="mt-1 text-sm text-gray-900">${item.kejadianKhusus.jumlahLaki}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Jumlah Perempuan</label>
+                                    <p class="mt-1 text-sm text-gray-900">${item.kejadianKhusus.jumlahPerempuan}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Jumlah Fobia</label>
+                                    <p class="mt-1 text-sm text-gray-900">${item.kejadianKhusus.jumlahFobia}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Jumlah Intoleran</label>
+                                    <p class="mt-1 text-sm text-gray-900">${item.kejadianKhusus.jumlahIntoleran}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Jumlah Alergi</label>
+                                    <p class="mt-1 text-sm text-gray-900">${item.kejadianKhusus.jumlahAlergi}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Total Kejadian Khusus</label>
+                                    <p class="mt-1 text-sm text-gray-900 font-semibold">${item.kejadianKhusus.jumlahLaki + item.kejadianKhusus.jumlahPerempuan + item.kejadianKhusus.jumlahFobia + item.kejadianKhusus.jumlahIntoleran + item.kejadianKhusus.jumlahAlergi}</p>
+                                </div>
+                            </div>
+                            ${item.kejadianKhusus.catatanHari ? `
+                            <div class="mt-4">
+                                <label class="block text-sm font-medium text-gray-700">Catatan Hari Ini</label>
+                                <p class="mt-1 text-sm text-gray-900 bg-gray-50 p-3 rounded-md">${item.kejadianKhusus.catatanHari}</p>
+                            </div>
+                            ` : ''}
+                        </div>
+                        ` : ''}
+                    </div>
+                `;
+
+                document.getElementById('detailModal').classList.remove('hidden');
+            }
+
+            editData(id) {
+                const item = this.data.find(d => d.id === id);
+                if (item) {
+                    this.showForm(item);
+                }
+            }
+
+            showDeleteModal(id) {
+                this.deleteId = id;
+                document.getElementById('deleteModal').classList.remove('hidden');
+            }
+
+            deleteData() {
+                if (this.deleteId) {
+                    this.data = this.data.filter(d => d.id !== this.deleteId);
+                    this.filteredData = this.filteredData.filter(d => d.id !== this.deleteId);
+                    this.saveData();
+
+    // === 🔽 Tambahan baru: Kirim ke Google Sheet ===
+    const scriptURL = "https://script.google.com/macros/s/AKfycbz_MXN5s-cePJTOPuEuDaXjkI-7SH2OuWWDmfR4jcQNPwB7wEYnym7ax0uWGNyWui8Q/exec"; // ganti URL kamu di sini o
+    fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" }
+    })
+    .then(res => res.text())
+    .then(() => this.showNotification("Data tersimpan juga ke Google Sheet!"))
+    .catch(() => this.showNotification("Offline: Data hanya tersimpan lokal.", "error"));
+    // === 🔼 Tambahan baru sampai sini ===
+
+                    this.renderTable();
+                    this.closeDeleteModal();
+                    this.showNotification('Data berhasil dihapus!');
+                }
+            }
+
+            closeDetailModal() {
+                document.getElementById('detailModal').classList.add('hidden');
+            }
+
+            closeDeleteModal() {
+                document.getElementById('deleteModal').classList.add('hidden');
+                this.deleteId = null;
+            }
+
+            formatPenyajian(value) {
+                const options = {
+                    'stainless': 'Menggunakan peralatan makan stainless',
+                    'organik': 'Bungkus organik',
+                    'non-organik': 'Bungkus non-organik',
+                    'lainnya': 'Lainnya'
+                };
+                return options[value] || value;
+            }
+
+            formatAlasan(value) {
+                if (!value) return 'Tidak ada';
+                const options = {
+                    'menu-tidak-sesuai': 'Menu tidak sesuai',
+                    'basi': 'Basi',
+                    'berbahaya': 'Berbahaya',
+                    'seluruh-layak': 'Seluruh layak',
+                    'lainnya': 'Lainnya'
+                };
+                return options[value] || value;
+            }
+
+            formatAlasanDikembalikan(value) {
+                if (!value) return 'Tidak ada';
+                const options = {
+                    'porsi-tidak-layak': 'Porsi makan tidak layak',
+                    'siswa-tidak-hadir': 'Terdapat peserta didik yang tidak hadir',
+                    'porsi-berlebih': 'Porsi makanan terkirim lebih dari jumlah peserta didik penerima manfaat',
+                    'tidak-ada-dikembalikan': 'Tidak ada porsi makan yang dikembalikan',
+                    'lainnya': 'Lainnya'
+                };
+                return options[value] || value;
+            }
+
+            showNotification(message, type = 'success') {
+                const notification = document.createElement('div');
+                const bgColor = type === 'error' ? 'bg-red-500' : 'bg-green-500';
+                notification.className = `fixed top-4 right-4 ${bgColor} text-white px-6 py-3 rounded-lg shadow-lg z-50 fade-in`;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            }
+        }
+
+        // Initialize the application
+        const mbgManager = new MBGDataManager();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98e6bd926284fdf4',t:'MTc2MDQ0MTM4My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
